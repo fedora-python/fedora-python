@@ -49,6 +49,23 @@ alternatives system)
     (for example, `/usr/bin/python3` should refer to `/usr/bin/python3.5`
     on Fedora 25, but `/usr/bin/python3.6` on Fedora 26)
 
+## Fedora 27 plans
+
+For Fedora 27, it's expected that `/usr/bin/python` and `/usr/bin/python2` will
+be owned specifically by the 2.7 stream of the `python2` module.
+
+Similarly, it's expected that `/usr/bin/python3` will be owned specifically by
+the 3.6 stream of the `python3` module.
+
+These simplifications are possible because those allocations are consistent with
+the base platform in both F26 and F27, so there's no need to support
+dynamically reconfiguring them (yet).
+
+It isn't clear yet how the parallel installability for the 2.6, 3.4, and 3.5
+streams will be handled - the general assumption so far has been that module
+streams don't support parallel installation, which doesn't account for stacks
+which are deliberately designed to use version-dependent filesystem paths.
+
 # Default Python module
 
 The key technical enabler for this proposal will be a new `default-python`
