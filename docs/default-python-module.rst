@@ -1,4 +1,8 @@
-# Making the default Python configurable
+Making the default Python configurable
+======================================
+
+Background
+----------
 
 From Fedora 23 to Fedora 27, Fedora has offered two community supported
 configurations for the `/usr/bin/python` symlink:
@@ -25,7 +29,8 @@ For mutable traditional systems, the selection between these alternatives be
 made using (TBD between plain old mutually conflicting RPMs and the
 alternatives system)
 
-## Key assumptions
+Key assumptions
+~~~~~~~~~~~~~~~
 
 * User level activation of different Python versions will be handled through
   existing mechanisms (virtual environments, conda, pyenv, environment modules,
@@ -49,7 +54,8 @@ alternatives system)
     (for example, `/usr/bin/python3` should refer to `/usr/bin/python3.5`
     on Fedora 25, but `/usr/bin/python3.6` on Fedora 26)
 
-## Fedora 27 plans
+Fedora 27 plans
+~~~~~~~~~~~~~~~
 
 For Fedora 27, it's expected that `/usr/bin/python` and `/usr/bin/python2` will
 be owned specifically by the 2.7 stream of the `python2` module.
@@ -66,7 +72,8 @@ streams will be handled - the general assumption so far has been that module
 streams don't support parallel installation, which doesn't account for stacks
 which are deliberately designed to use version-dependent filesystem paths.
 
-# Default Python module
+Default Python module
+---------------------
 
 The key technical enabler for this proposal will be a new `default-python`
 module with three defined streams:
@@ -78,9 +85,9 @@ module with three defined streams:
 The `no-default` stream will depend solely on the Platform module, and define
 `/usr/bin/python` as a script that reports an error like the following:
 
-> `/usr/bin/python` is not configured on this system. Please specify either
-> `/usr/bin/python2` or `/usr/bin/python3` as appropriate in the script header,
-> or else reconfigure the system to use one of those by default.
+   `/usr/bin/python` is not configured on this system. Please specify either
+   `/usr/bin/python2` or `/usr/bin/python3` as appropriate in the script header,
+   or else reconfigure the system to use one of those by default.
 
 The `python2-default` stream will depend on the platform's default Python 2
 stream, and define `/usr/bin/python` as a symlink to `/usr/bin/python2`.
@@ -88,7 +95,8 @@ stream, and define `/usr/bin/python` as a symlink to `/usr/bin/python2`.
 The `python3-default` stream will depend on the platform's default Python 3
 stream, and define `/usr/bin/python` as a symlink to `/usr/bin/python3`.
 
-# Handling non-modular systems
+Handling non-modular systems
+----------------------------
 
 For immutable OSTree and container images, and for mutable modular systems,
 the desired `/usr/bin/python` behaviour can be chosen by selecting the
@@ -97,7 +105,8 @@ appropriate stream for the `default-python` module.
 However, there still needs to be a suitable way of enabling this configurability
 for systems that are using a traditional "flat" RPM management approach.
 
-## Mutually conflicting RPMs
+Mutually conflicting RPMs
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The simplest option to *generate* would likely be mutually conflicting RPMs,
 with `default-python-no-default`, `default-python-python2-default`, and
@@ -111,7 +120,8 @@ New default Python options (e.g. PyPy, PyPy3) would be added by defining
 appropriate update streams in the `default-python` module and regenerating
 the flattened traditional repo.
 
-## Alternatives system
+Alternatives system
+~~~~~~~~~~~~~~~~~~~
 
 Supporting the alternatives system instead of relying solely on mutually
 conflicting RPMs would require additional work when generating the traditional
