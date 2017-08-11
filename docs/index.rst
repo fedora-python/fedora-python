@@ -62,10 +62,12 @@ Key documentation resources
 * the `Python section`_ in the Fedora Developer Portal (remember to update this
   as recommendations and the available tooling change!)
 * Fedora's `Python Packaging Guidelines`_
+* the `Conservative Python 3 porting guide`_
 
 .. _Python SIG page: https://fedoraproject.org/wiki/SIGs/Python
 .. _Python section: https://developer.fedoraproject.org/tech/languages/python/python-installation.html
 .. _Python Packaging Guidelines: https://fedoraproject.org/wiki/Packaging:Python
+.. _Conservative Python 3 porting guide: https://portingguide.readthedocs.io
 
 
 Updating this site
