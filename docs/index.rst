@@ -71,7 +71,7 @@ Key documentation resources
 
 
 Updating this site
-==================
+------------------
 
 This site is a Sphinx project maintained & hosted on Fedora's Pagure service:
 `fedora-python`_
@@ -93,7 +93,7 @@ that script actually does.
 .. _fedora-python: https://pagure.io/fedora-python/fedora-python
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
