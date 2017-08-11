@@ -74,10 +74,10 @@ Updating this site
 This site is a Sphinx project maintained & hosted on Fedora's Pagure service:
 `fedora-python`_
 
-To update the live pages at https://docs.pagure.io/fedora-python do::
+To update the live pages at https://docs.pagure.io/fedora-python/fedora-python/::
 
     $ cd docs
-    $ ./update_docs.sh fedora-python
+    $ ./update_docs.sh
 
 See https://docs.pagure.org/pagure/usage/using_doc.html for more details on what
 that script actually does.
