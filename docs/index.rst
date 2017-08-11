@@ -81,6 +81,8 @@ To update the live pages at https://docs.pagure.io/fedora-python/fedora-python/:
     $ cd docs
     $ ./update_docs.sh
 
+The script will bring up an editor window to enter a suitable commit message.
+
 See https://docs.pagure.org/pagure/usage/using_doc.html for more details on what
 that script actually does.
 
