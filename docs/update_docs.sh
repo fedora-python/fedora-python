@@ -13,5 +13,5 @@ cp -r _build/html/* $DOCS_REPO_NAME/
     git push
 )
 
-rm -rfI _build
-rm -rfI $DOCS_REPO_NAME
+#rm -rfI _build
+#rm -rfI $DOCS_REPO_NAME
