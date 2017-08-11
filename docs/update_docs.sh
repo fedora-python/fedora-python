@@ -2,14 +2,16 @@
 
 make html
 
-git clone "ssh://git@pagure.io/docs/$1.git"
-cp -r _build/html/* $1/
+DOCS_REPO_NAME="fedora-python"
+
+git clone "ssh://git@pagure.io/docs/$DOCS_REPO_NAME.git"
+cp -r _build/html/* $DOCS_REPO_NAME/
 (
-    cd $1
+    cd $DOCS_REPO_NAME
     git add .
     git commit -av
     git push
 )
 
 rm -rfI _build
-rm -rfI $1
+rm -rfI $DOCS_REPO_NAME
