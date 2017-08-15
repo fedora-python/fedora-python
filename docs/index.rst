@@ -21,8 +21,9 @@ Current plans
 
 .. toctree::
    :maxdepth: 1
+   :glob:
 
-   default-python-module
+   plans/*
 
 * `Python 3 migration plans`_ (Note: currently still hosted on the Fedora wiki)
 

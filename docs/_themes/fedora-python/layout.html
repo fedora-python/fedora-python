@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include "head.html" %}
+  </head>
+  <body>
+    <div class="website-header">
+      <div class="container-fluid">
+        <h1 style="color: white">
+          <a href="{{ pathto(master_doc) }}">
+            <img class="logo" src="{{ pathto('_static/fedoralovespython.svg', 1) }}">
+          </a>
+          Python on Fedora
+        </h1>
+      </div>
+    </div>
+
+    <div class="website-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2 menu">
+            {{ toc }}
+          </div>
+          <div class="col-md-10 content">
+            <ol class="breadcrumb">
+              <li><a href="{{ pathto(master_doc) }}">Home</a></li>
+              {% for doc in parents %}
+                  <li><a href="{{ doc.link|e }}">{{ doc.title }}</a></li>
+              {% endfor %}
+              {% if pagename != master_doc %}
+                  <li class="active">{{ title }}</li>
+              {% endif %}
+            </ol>
+
+            <div class="document">
+            {% block body %}{% endblock %}
+            </div>
+
+            <hr>
+
+            <div class="next-prev-btns">
+              {% if next %}
+                <a href="{{ next.link|e }}" class="btn btn-default pull-right">
+                  {{ _('Next') }}
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+              {% else %}
+                <a href="" class="btn btn-default pull-right disabled"> <span class="glyphicon glyphicon-chevron-right"></span></a>
+              {% endif %}
+              {% if prev %}
+                <a href="{{ prev.link|e }}" class="btn btn-default">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                  {{ _('Previous') }}
+                </a>
+              {% else %}
+                <a href="" class="btn btn-default disabled">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                  {{ _('Previous') }}
+                </a>
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      {% include "footer.html" %}
+    </footer>
+  </body>
+</html>

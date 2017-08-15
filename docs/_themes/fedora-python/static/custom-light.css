@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Alte Haas Grotesk';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Alte Haas Grotesk'), url('AlteHaasGroteskRegular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Alte Haas Grotesk';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Alte Haas Grotesk Bold'), url('AlteHaasGroteskBold.woff') format('woff');
+}
+
+* {
+  font-family: 'Alte Haas Grotesk';
+}
+
+div.website-header {
+  color: #072b61;
+}
+
+div.website-header img.logo {
+  width: 280px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+
+}
+
+div.website-header ul.main-menu {
+  margin-top: 60px;
+  font-size: 1.4em;
+  color: #072b61;
+}
+
+div.website-header ul.main-menu li a {
+  color: #072b61;
+}
+
+div.website-header ul.main-menu li.active a {
+  color: white;
+  background-color: #072b61;
+}
+
+div.jumbotron-home {
+  background-color: #072b61;
+  color: white;
+}
+
+a.btn {
+  border-radius: 0;
+}
+
+a.btn-primary {
+  background-color: #0a57a4;
+  border-color: #0a57a4;
+}
