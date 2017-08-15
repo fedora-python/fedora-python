@@ -79,24 +79,12 @@ __ FLP-source-repo_
 Updating this site
 ------------------
 
-This site is a Sphinx project maintained & hosted on Fedora's Pagure service:
+This site is a Sphinx project maintained on Fedora's Pagure service:
 `fedora-python`_
 
-To update the live pages at https://docs.pagure.io/fedora-python/fedora-python/::
+The live pages are hosted on ReadTheDocs: https://fedora-python.readthedocs.io/
 
-    $ cd docs
-    $ ./update_docs.sh
-
-The script will bring up an editor window to enter a suitable commit message.
-
-See https://docs.pagure.org/pagure/usage/using_doc.html for more details on what
-that script actually does.
-
-.. note:: The script will currently happily let you publish changes you haven't
-   actually committed to the fedora-python repo, so please don't do that :)
-
-   Ideally the manual publication step will go away at some point, and updates
-   will instead just happen when changes are committed.
+Pushed & merged changes will be automatically published to the live site.
 
 .. _fedora-python: https://pagure.io/fedora-python/fedora-python
 
