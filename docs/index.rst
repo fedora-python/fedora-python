@@ -84,9 +84,14 @@ organisation on GitHub: `fedora-python`_
 
 The live pages are hosted on ReadTheDocs: https://fedora-python.readthedocs.io/
 
-Pushed & merged changes will be automatically published to the live site.
+Pushed & merged changes will be automatically published to the live site. To
+test the docs locally prior to publication (requires `sphinx`_)::
+
+    cd docs
+    make html
 
 .. _fedora-python: https://github.com/fedora-python/fedora-python
+.. _sphinx: https://pypi.org/project/Sphinx/
 
 Indices and tables
 ------------------
