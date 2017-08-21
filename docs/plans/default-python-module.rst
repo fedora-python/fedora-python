@@ -57,7 +57,7 @@ Goals of this proposal
   * Python 3.7 (once released upstream)
 
 * for container images that have been configured to use a Python 3 version
-  other than the default, we will use RPM conflicts to ensure that users are
+  other than the default, we will come up with a mechanism to ensure users are
   NOT also able to install regular Fedora packages that depend on Python 3 (as
   those packages will expect ``/usr/bin/python3`` to refer specifically to
   Python 3.6)
