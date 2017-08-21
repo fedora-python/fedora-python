@@ -15,8 +15,8 @@ For Fedora 28, the aim will instead be to offer the following 3 options:
 * reports a custom error message explaining how to select either the Python 2
   stack or the Python 3 stack via either the script shebang line or the system
   configuration
-* refers to ``/usr/bin/python2`` (requires installation of the ``python2`` package)
-* refers to ``/usr/bin/python3`` (requires installation of the ``python3`` package)
+* refers to ``/usr/bin/python2``
+* refers to ``/usr/bin/python3``
 
 For immutable OSTree and container images, the selection between these
 alternatives will be made when choosing the module streams to include in the
@@ -29,6 +29,40 @@ For mutable traditional systems, the selection between these alternatives be
 made using (TBD between plain old mutually conflicting RPMs and the
 alternatives system)
 
+
+Goals of this proposal
+~~~~~~~~~~~~~~~~~~~~~~
+
+* for full Fedora installations (whether created as a system image or via
+  the interactive installer), users will be able to choose whether
+  ``/usr/bin/python`` refers to:
+
+  * Python 3.6 (via ``/usr/bin/python3``)
+  * Python 2.7 (via ``/usr/bin/python2``)
+  * the default handler that indicates no usable default has been configured
+
+* for container images targeted at layered application development, users will
+  be able to choose whether ``/usr/bin/python`` refers to:
+
+  * Python 3.x (via ``/usr/bin/python3`` - see next goal)
+  * Python 2.7 (via ``/usr/bin/python2``)
+  * the default handler that indicates no usable default has been configured
+
+* for container images targeted at layered application development, users will
+  be able to choose whether ``/usr/bin/python3`` refers to:
+
+  * Python 3.4
+  * Python 3.5
+  * Python 3.6 (the default)
+  * Python 3.7 (once released upstream)
+
+* for container images that have been configured to use a Python 3 version
+  other than the default, we will use RPM conflicts to ensure that users are
+  NOT also able to install regular Fedora packages that depend on Python 3 (as
+  those packages will expect ``/usr/bin/python3`` to refer specifically to
+  Python 3.6)
+
+
 Key assumptions
 ~~~~~~~~~~~~~~~
 
@@ -36,26 +70,15 @@ Key assumptions
   existing mechanisms (virtual environments, conda, pyenv, environment modules,
   Software Collections, etc)
 * As a result of F27 Modular Server development, we'll have a ``python3`` module
-  that has streams for 3.4, 3.5, and 3.6. See the `Python 3 module repo`_ for
+  that has streams for 3.4, 3.5, and 3.6. See the `Python 3 modules overview`_ for
   more details on the expected contents of the Python modules.
+* Once CPython 3.7.0b1 is released upstream in January 2018 (and potentially
+  earlier), we will also have a 3.7 stream in the Python 3 modules
 * As a result of F27 Modular Server development, we'll have a ``python2`` module
   that has at least a Python 2.7 stream, and probably a legacy 2.6 stream to
   enable RHEL/CentOS 6 integration testing (for folks that care about that).
-* Unlike the ``/usr/bin/python`` link, we probably *won't* offer free choice of
-  what ``/usr/bin/python2`` and ``/usr/bin/python3`` mean, since those are
-  defined as permitted targets for system packages in the packaging policy
-* At a modularity tooling feature level, this suggests a couple of things:
 
-  * whether or not streams are parallel installable will likely need to be a
-    module level setting (the different ``python2`` and ``python3`` streams will
-    be parallel installable on a single system, while the ``default-python``
-    streams will conflict with each other)
-  * we will need a way for modules and/or packages to say "only install this
-    file if this stream is the default stream for the current platform"
-    (for example, ``/usr/bin/python3`` should refer to ``/usr/bin/python3.5``
-    on Fedora 25, but ``/usr/bin/python3.6`` on Fedora 26)
-
-.. _Python 3 module repo: https://github.com/modularity-modules/python3
+.. _Python 3 modules overview: https://github.com/modularity-modules/python3
 
 Fedora 27 plans
 ~~~~~~~~~~~~~~~
@@ -136,3 +159,60 @@ able to obtain a list of all currently installed candidate providers.
 It should be possible to start out with the simpler mutually conflicting RPMs
 approach to handling the flattened repo case, and then explore possible
 integration with the alternatives system as a subsequent enhancement.
+
+
+Layered application development images
+--------------------------------------
+
+Layered application development images (i.e. those where the system package
+manager just provides the Python runtime and the Python level package manager,
+with any Python level dependencies managed using Python specific tools) bring
+in an additional complication: they either need to leave the
+``/usr/bin/python3`` symlink alone (which would confuse users of the image),
+or else they need to prevent the installation of any Fedora packages that
+assume ``/usr/bin/python3`` refers to the default Python stack for that
+version of Fedora.
+
+Given the use case, the latter approach seems most appropriate. While this
+isn't currently supported by the modularity tooling, our initial proposal for
+dealing with it will be:
+
+* allow modules to make their streams parallel installable by defining
+  which files to omit for non-default streams, as well as how to modify
+  dependency clauses for non-default streams (e.g. regex substitutions)
+* allow the defaults for those two categories of changes to be specified
+  *separately* in the system profile, so its possible to install the
+  ``/usr/bin/python3`` symlink without actually declaring ``Provides: python3``
+* make it possible to "lock" a module to its default stream in the system
+  profile, such that you can't actually change it without editing the system
+  profile first
+* automatically lock modules to their default stream when the runtime default
+  isn't the same as the package dependency resolution default
+
+
+Derived requirements for modularity tooling
+-------------------------------------------
+
+In order to support the above plan, we're going to need to ensure the modularity
+tooling offers the following features (or functional equivalents):
+
+* specifying a default "runtime" stream for a module in a system profile, and
+  then having a mechanism whereby a particular symlink will only be installed
+  if it is the default stream (specifically, ``/usr/bin/python3`` indicates the
+  default Python 3 version, and exactly which version that links to should be
+  part of the system definition, *not* the module definition: 3.5 on F25,
+  3.6 in F27 and F28, 3.7 in F29, etc)
+* declaring in a system profile that a module is locked to its default runtime
+  stream, and disallowing changes during operation of the system
+* specifying a default "dependency resolution" stream for a module in a system
+  profile, and then having a mechanism whereby dependency resolution clauses
+  (``Provides``, ``Requires``, etc) matching a particular pattern will be
+  automatically rewritten when not part of the default stream (specifically, to
+  allow parallel installation of streams, the ``Provides: pythonX*``
+  declarations for non-default streams need to be remapped to
+  ``Provides: pythonXY*``, and similarly for the other dependency clauses)
+* implicitly locking a module to its default runtime stream when the runtime
+  default stream in the system profile doesn't match the default dependency
+  resolution stream (thus preventing any of those default dependencies from
+  being satisfied, and thus blocking the installation of packages that were built
+  expecting a different runtime default)
