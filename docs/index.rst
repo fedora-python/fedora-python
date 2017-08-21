@@ -53,7 +53,7 @@ with distro packaging tools. Full enablement of the Python ecosystem requires
 additional components beyond these core ones (e.g. requests, SQL Alchemy,
 Django, Flask, mod_wsgi, Jinja2, NumPy, twisted, pytest, nose, sphinx).
 
-.. TODO: add links to the relevant repos for key packages & modules
+.. TODO: add links to the relevant dist-git repos for key packages & modules
 
 Key documentation resources
 ---------------------------
@@ -79,14 +79,14 @@ __ FLP-source-repo_
 Updating this site
 ------------------
 
-This site is a Sphinx project maintained on Fedora's Pagure service:
-`fedora-python`_
+This site is a Sphinx project maintained as part of the fedora-python
+organisation on GitHub: `fedora-python`_
 
 The live pages are hosted on ReadTheDocs: https://fedora-python.readthedocs.io/
 
 Pushed & merged changes will be automatically published to the live site.
 
-.. _fedora-python: https://pagure.io/fedora-python/fedora-python
+.. _fedora-python: https://github.com/fedora-python/fedora-python
 
 Indices and tables
 ------------------
