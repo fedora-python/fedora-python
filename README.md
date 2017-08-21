@@ -1,6 +1,5 @@
 # fedora-python
 
-Python on Fedora
+Sphinx project for https://fedora-python.readthedocs.io/
 
-* [Finalizing Python 3 Migration](https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
-* [Configurable Default Python](docs/default-python-module.md)
+These pages provide an overview of current activities of the Fedora Python SIG.
