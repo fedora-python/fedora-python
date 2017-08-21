@@ -87,7 +87,7 @@ For Fedora 27, it's expected that ``/usr/bin/python`` and ``/usr/bin/python2``
 will be owned specifically by the 2.7 stream of the ``python2`` module.
 
 Similarly, it's expected that ``/usr/bin/python3`` will be owned specifically
-by the 3.6 stream of the `python3` module.
+by the 3.6 stream of the ``python3`` module.
 
 These simplifications are possible because those allocations are consistent with
 the base platform in both F26 and F27, so there's no need to support
