@@ -23,8 +23,8 @@ image.
 For mutable modular systems, the selection between these alternatives will be
 made using the module system.
 
-For mutable traditional systems, the selection between these alternatives be
-made using (TBD between plain old mutually conflicting RPMs and the
+For mutable traditional systems, the selection between these alternatives will
+be made using (TBD between plain old mutually conflicting RPMs and the
 alternatives system)
 
 For integrated Fedora environments (e.g Fedora Workstation, Fedora Workstation,
