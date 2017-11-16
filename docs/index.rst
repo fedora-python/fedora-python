@@ -65,6 +65,7 @@ Key documentation resources
 * the `Fedora Loves Python`_ site (`source repo`__)
 * Fedora's `Python Packaging Guidelines`_
 * the `Conservative Python 3 porting guide`_
+* the `Python RPM porting guide`_
 
 __ FLP-source-repo_
 
@@ -74,7 +75,7 @@ __ FLP-source-repo_
 .. _FLP-source-repo: https://github.com/fedora-python/fedoralovespython.org
 .. _Python Packaging Guidelines: https://fedoraproject.org/wiki/Packaging:Python
 .. _Conservative Python 3 porting guide: https://portingguide.readthedocs.io
-
+.. _Python RPM porting guide: https://python-rpm-porting.readthedocs.io
 
 Updating this site
 ------------------
