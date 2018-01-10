@@ -1,6 +1,14 @@
 Making the default Python configurable
 ======================================
 
+.. note::
+
+   This idea has been deferred indefinitely, and will *not* be pursued for F28. Instead,
+   we're continuing with the transition steps outlined `here <https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3#Transition_Steps>__.
+   
+   We may revisit this idea as the Fedora modularity tools mature.
+
+
 Design Concept
 --------------
 
