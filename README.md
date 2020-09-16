@@ -1,5 +1,7 @@
 # fedora-python
 
-Sphinx project for https://fedora-python.readthedocs.io/
+Sphinx project for the decomissioned https://fedora-python.readthedocs.io/
 
-These pages provide an overview of current activities of the Fedora Python SIG.
+For current information about the Fedora Python SIG, please visit our wiki:
+
+https://fedoraproject.org/wiki/SIGs/Python
